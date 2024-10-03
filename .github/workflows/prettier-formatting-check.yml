@@ -19,15 +19,10 @@ jobs:
         with:
           node-version: '20.x'
 
-      - name: Install dependencies
-        run: npm install
+      - name: Install Prettier only
+        run: npm install --save-dev prettier
 
       - name: Run Prettier check
         run: |
-          npx prettier --check "**/*.{js,ts,tsx,jsx,json,css}"
-        continue-on-error: true
-
-      - name: Show instructions if check fails
-        if: failure()
-        run: echo "Prettier check failed. Please run 'npm run prettier:format' locally to fix the formatting issues and push the changes."
+          npx prettier --check "**/*.{js,ts,tsx,jsx,json,css}" || (echo "Prettier check failed. Please run 'npm run prettier:format' locally to fix the formatting issues and push the changes." && exit 1)
 
