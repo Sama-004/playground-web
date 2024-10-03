@@ -19,8 +19,8 @@ jobs:
         with:
           node-version: '20.x'
 
-      - name: Install Prettier only
-        run: npm install --save-dev prettier
+      - name: Install dependencies
+        run: npm install
 
       - name: Run Prettier check
         run: |
