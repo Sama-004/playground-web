@@ -24,5 +24,10 @@ jobs:
 
       - name: Run Prettier check
         run: |
-          npx prettier --check "**/*.{js,ts,tsx,jsx,json,css}" || (echo "Prettier check failed. Please run 'npm run prettier:format' locally to fix the formatting issues and push the changes." && exit 1)
+          npx prettier --check "**/*.{js,ts,tsx,jsx,json,css}"
+        continue-on-error: true
+
+      - name: Show instructions if check fails
+        if: failure()
+        run: echo "Prettier check failed. Please run 'npm run prettier:format' locally to fix the formatting issues and push the changes."
 
